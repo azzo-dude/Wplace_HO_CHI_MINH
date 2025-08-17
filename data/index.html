@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Góp phần xây dựng hình ảnh Bác Hồ - Wplace.live</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-hidden">
+    <audio id="tuyenNgonAudio" src="https://gass.gitee.io/wplace-asset/audio/Bac-Ho-doc-Tuyen-ngon-Doc-lap.mp3" preload="auto"></audio>
+    <audio id="quocCaAudio" src="https://gass.gitee.io/wplace-asset/audio/Quoc-ca-Viet-Nam.mp3" loop preload="auto"></audio>
+    <div id="audio-overlay" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 backdrop-blur-sm transition-opacity duration-500">
+        <div class="text-center">
+            <h2 class="text-3xl font-bold mb-4 text-shadow">Wplace.live - Góp sức vì Tổ quốc</h2>
+            <p class="mb-8 text-lg text-gray-300">Nhấn để bắt đầu và nghe âm thanh</p>
+            <button id="start-button" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-lg text-xl transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-500">
+                Bắt đầu
+            </button>
+        </div>
+    </div>
+
+    <div class="min-h-screen bg-cover bg-center bg-fixed" style="background-image: url('https://gass.gitee.io/wplace-asset/image/bg.jpg');">
+        <div class="min-h-screen bg-black bg-opacity-60 flex items-center justify-center p-4">
+            <div class="max-w-4xl w-full bg-gray-800 bg-opacity-80 backdrop-blur-md rounded-2xl shadow-2xl overflow-hidden border border-gray-700">
+                <div class="md:flex">
+                    <div class="md:w-1/2">
+                        <img src="https://gass.gitee.io/wplace-asset/image/Wplace_Ho_Chi_Minh.jpg" alt="Hình ảnh Hồ Chí Minh trên Wplace" class="object-cover h-full w-full" onerror="this.onerror=null;this.src='https://placehold.co/600x800/ff0000/ffffff?text=H%E1%BB%93+Ch%C3%AD+Minh';">
+                    </div>
+
+                    <div class="p-8 md:w-1/2 flex flex-col justify-center">
+                        <h1 class="text-3xl md:text-4xl font-bold mb-4 text-yellow-400 text-shadow">Cùng nhau vẽ nên hình ảnh Bác Hồ!</h1>
+                        <p class="text-gray-300 mb-6">
+                            Hãy cùng chung tay góp những pixel để hoàn thiện bức chân dung Chủ tịch Hồ Chí Minh vĩ đại trên Wplace.live, thể hiện lòng yêu nước và tinh thần đoàn kết dân tộc.
+                        </p>
+
+                        <div class="bg-gray-900 bg-opacity-50 rounded-lg p-4 mb-6 border border-gray-700">
+                            <h2 class="text-xl font-semibold mb-3 text-red-500">Thông tin Tọa độ</h2>
+                            <ul class="space-y-2 text-lg">
+                                <li><span class="font-bold text-gray-400 w-28 inline-block">Template TL X:</span> <code class="bg-gray-700 px-2 py-1 rounded">1665</code></li>
+                                <li><span class="font-bold text-gray-400 w-28 inline-block">Template TL Y:</span> <code class="bg-gray-700 px-2 py-1 rounded">961</code></li>
+                                <li><span class="font-bold text-yellow-300 w-28 inline-block">Pixel X:</span> <code class="bg-yellow-800 text-yellow-200 px-2 py-1 rounded">890</code></li>
+                                <li><span class="font-bold text-yellow-300 w-28 inline-block">Pixel Y:</span> <code class="bg-yellow-800 text-yellow-200 px-2 py-1 rounded">969</code></li>
+                            </ul>
+                            <p class="text-sm mt-3 text-gray-400">Hãy chắc chắn bạn chọn đúng màu và đặt pixel tại tọa độ <strong class="text-yellow-300">(Px X, Px Y)</strong>.</p>
+                        </div>
+
+                        <a href="https://wplace.live/#x=890&y=969&scale=50" target="_blank" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-lg text-center text-xl transition-transform transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-500">
+                            Đến Wplace.live và Đặt Pixel!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('audio-overlay');
+        const startButton = document.getElementById('start-button');
+        const tuyenNgonAudio = document.getElementById('tuyenNgonAudio');
+        const quocCaAudio = document.getElementById('quocCaAudio');
+
+        function startExperience() {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500);
+
+            tuyenNgonAudio.play().catch(error => {
+                console.error("Lỗi khi phát âm thanh Tuyên ngôn:", error);
+                quocCaAudio.play().catch(err => console.error("Lỗi khi phát âm thanh Quốc ca:", err));
+            });
+        }
+        startButton.addEventListener('click', startExperience);
+            console.log("Tuyên ngôn Độc lập đã kết thúc, bắt đầu phát Quốc ca.");
+            quocCaAudio.play().catch(error => {
+                console.error("Lỗi khi phát âm thanh Quốc ca:", error);
+            });
+        });
+    </script>
+
+</body>
+</html>
